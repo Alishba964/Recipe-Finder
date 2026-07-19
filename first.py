@@ -4,20 +4,36 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 API_KEY=os.getenv("API_KEY")
+def search_recipes(query):
+    name=input("Enter name of food or main ingredients: ")
+    url=f"https://api.spoonacular.com/recipes/complexSearch?query={name}&maxFat=25&apiKey={API_KEY}"
+    response=requests.get(url)
+    data=response.json()
 
-name=input("Enter name of food or main ingredients: ")
-url=f"https://api.spoonacular.com/recipes/complexSearch?query={name}&maxFat=25&apiKey={API_KEY}"
-response=requests.get(url)
-data=response.json()
+    if (response.status_code != 200):
+        print("API ERROR")
+        print(response.text)
+        exit()
 
-if (response.status_code != 200):
-    print("API ERROR")
-    print(response.text)
-    exit()
+    if not data["results"]:
+        print("No Recipes Found")
+        exit()
+    
+    return data.get("results", [])
 
-if not data["results"]:
-    print("No Recipes Found")
-    exit()
+    # name=input("Enter name of food or main ingredients: ")
+##url=f"https://api.spoonacular.com/recipes/complexSearch?query={name}&maxFat=25&apiKey={API_KEY}"
+# response=requests.get(url)
+# data=response.json()
+
+# if (response.status_code != 200):
+#     print("API ERROR")
+#     print(response.text)
+#     exit()
+
+# if not data["results"]:
+#     print("No Recipes Found")
+#     exit()
 
 for index , recipe in enumerate(data["results"]):
     print(f"{index+1}. {recipe['title']}")
