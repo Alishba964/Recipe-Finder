@@ -12,12 +12,10 @@ def search_recipes(query):
     data=response.json()
 
     if (response.status_code != 200):
-        print("API ERROR")
-        print(response.text)
+        
         return None
 
     if not data["results"]:
-        print("No Recipes Found")
         return []
     
     recipes = []
@@ -36,8 +34,6 @@ def get_recipe_details(recipe_id):
     details_url=f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey={API_KEY}"
     details_response=requests.get(details_url)
     if details_response.status_code != 200:
-        print("Failed to fetch recipe details.")
-        print(details_response.text)
         return None
     details=details_response.json()
 

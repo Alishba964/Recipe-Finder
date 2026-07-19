@@ -1,5 +1,8 @@
 import customtkinter as ctk
 from PIL import Image
+import requests
+from tkinter import messagebox
+from io import BytesIO
 from first import search_recipes
 from first import get_recipe_details
 ctk.set_appearance_mode("dark")
@@ -30,8 +33,19 @@ def search():
         return
     temp = search_recipes(name)
     if temp== None:
+        messagebox.showerror(
+            "API ERROR",
+            "Could not connect to the Recipe API.\nPlease try again later."
+        )
         return
     if len(temp) == 0:
+        no_recipe = ctk.CTkLabel(
+        recipe_list,
+        text="❌ No Recipes Found",
+        font=("Segoe UI",16,"bold"),
+        text_color="white"
+        )
+        no_recipe.pack(pady=20)
         return 
     
     for widget in recipe_list.winfo_children():
@@ -88,7 +102,28 @@ def show_recipe(recipe_id):
     instructions_label.configure(
         text=recipe["instructions"]
     )
+    sourceUrl_label.configure(
+        text=f"Source url : {recipe["sourceUrl"]}"
+    )
+    #====================Image URL==================
+    image_url = recipe["image"]
 
+    response = requests.get(image_url)
+
+    img = Image.open(BytesIO(response.content))
+
+    recipe_image = ctk.CTkImage(
+    light_image=img,
+    dark_image=img,
+    size=(300,220)
+    )
+
+    image_label.configure(
+    image=recipe_image,
+    text=""
+     )
+
+    image_label.image = recipe_image
     
 #----------------------------------------------------------------------------------------------------------
 main_frame = ctk.CTkFrame(app,corner_radius=15,fg_color=FRAME_COLOR)
@@ -250,4 +285,11 @@ instructions_label = ctk.CTkLabel(
     wraplength=500
 )
 instructions_label.pack(fill="x", padx=20)
+sourceUrl_label = ctk.CTkLabel(
+    details_frame,
+    text="Source url : ",
+    anchor="w"
+)
+sourceUrl_label.pack(fill="x", padx=20)
+
 app.mainloop()
