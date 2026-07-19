@@ -4,14 +4,23 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
 
-BG_COLOR = "#0F172A"          # Window Background
-FRAME_COLOR = "#1E293B"       # Main Frame
-CARD_COLOR = "#334155"        # Result Frame
-BUTTON_COLOR = "#2563EB"      # Search Button
-BUTTON_HOVER = "#1D4ED8"      # Button Hover
+# BG_COLOR = "#0d3b66"          # Window Background
+# FRAME_COLOR = "#faf0ca"       # Main Frame
+# CARD_COLOR = "#AAAD84"        # Result Frame
+# BUTTON_COLOR = "#ee964b"      # Search Button
+# BUTTON_HOVER = "#e27f2a"      # Button Hover
+# ENTRY_COLOR = "#90a3b5"       # Entry Background
+# TEXT_COLOR = "#F8FAFC"        # White Text
+# LABEL_COLOR = "#f95738"       # Light Blue Labels
+
+BG_COLOR = "#0d3b66"          # Window Background
+FRAME_COLOR = "#e4dbb6"       # Main Frame
+CARD_COLOR = "#C2984A"        # Result Frame
+BUTTON_COLOR = "#ee964b"      # Search Button
+BUTTON_HOVER = "#e27f2a"      # Button Hover
 ENTRY_COLOR = "#475569"       # Entry Background
 TEXT_COLOR = "#F8FAFC"        # White Text
-LABEL_COLOR = "#93C5FD"       # Light Blue Labels
+LABEL_COLOR = "#93C5FD"
 
 app = ctk.CTk()
 app.title("Recipe Finder")
@@ -22,7 +31,7 @@ app.resizable(False,False)
 main_frame = ctk.CTkFrame(app,corner_radius=15,fg_color=FRAME_COLOR)
 main_frame.pack(fill="both",expand=True,padx=15 , pady=15)
 
-title= ctk.CTkLabel(main_frame,text=" 🍴Recipe Finder",font=("Segoe UI", 28, "bold"),text_color="#A9B088")
+title= ctk.CTkLabel(main_frame,text=" 🍴Recipe Finder",font=("Segoe UI", 28, "bold"),text_color="#C2984A")
 title.pack(pady=15)
 
 search_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
@@ -42,7 +51,7 @@ city_entry.pack(side="left", padx=10)
 
 search_btn = ctk.CTkButton(
     search_frame,
-    text="Search🍳",
+    text="Search 🍳",
     width=120,
     height=40,
     font=("Segoe UI", 15, "bold"),
@@ -64,7 +73,7 @@ recipe_list = ctk.CTkScrollableFrame(
     fg_color="#2A3B52"
 )
 
-l1=ctk.CTkLabel(recipe_list,text="🍜Recipe List ",font=('Arial',20),text_color="#8D9275")
+l1=ctk.CTkLabel(recipe_list,text="🍜 Recipe List ",font=('Arial',20),text_color="#C2984A")
 l1.pack(pady=10)
 recipe_list.grid(row=0, column=0, sticky="nsew", padx=(10,5), pady=10)
 
@@ -74,14 +83,14 @@ details_frame = ctk.CTkScrollableFrame(
     fg_color="#243447"
 )
 details_frame.grid(row=0, column=1, sticky="nsew", padx=(5,10), pady=10)
-l2=ctk.CTkLabel(details_frame,text=" 📖Recipe Details ",font=('Arial',20),text_color="#8D9275")
+l2=ctk.CTkLabel(details_frame,text=" 📖 Recipe Details ",font=('Arial',20),text_color="#C2984A")
 l2.pack(pady=10)
 for i in range(15):
     btn = ctk.CTkButton(
         recipe_list,
         text=f"🍽 Recipe {i+1}",
      fg_color="#334155",
-       hover_color="#2563EB",
+       hover_color="#ee964b",
        anchor="w",
        height=40
     )
