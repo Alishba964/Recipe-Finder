@@ -32,8 +32,6 @@ def search_recipes(query):
     return recipes
 
 
-
-
 def get_recipe_details(recipe_id):
     details_url=f"https://api.spoonacular.com/recipes/{recipe_id}/information?apiKey={API_KEY}"
     details_response=requests.get(details_url)
