@@ -7,6 +7,7 @@ from first import search_recipes
 from first import get_recipe_details
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
+
 #---------------------------------------------------
 
 BG_COLOR = "#0d3b66"          # Window Background
